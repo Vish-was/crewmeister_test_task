@@ -21,10 +21,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "members": "json-server --watch src/json/members.json --port 3004",
-    "absences": "json-server --watch src/json/absences.json --port 3005",
     "start": "react-scripts start",
-    "dev": "concurrently \"npm run members\" \"npm run absences\" \"npm run start\"",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
