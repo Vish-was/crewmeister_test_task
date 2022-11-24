@@ -1,12 +1,18 @@
-import axios from 'axios'
+// import axios from 'axios'
 import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import Filter from '../components/Filter'
 import Pagination from '../components/Pagination'
-import { tableHeader } from '../json/tableData'
+import { tableHeader } from '../json/tableData';
+import { useDispatch, useSelector } from 'react-redux'
+import { AbsencesData } from '../Redux/Actions/absencesAction'
+import { MembersData } from '../Redux/Actions/membersAction'
+
 const Absences = () => {
-  const [members, setMembers] = useState([])
-  const [absences, setAbsences] = useState([])
+  const dispatch = useDispatch();
+  const absences = useSelector(state=>state.absence.data)
+  const members = useSelector(state=>state.member.data)
+
   const [filter, setFilter] = useState('')
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(false)
@@ -14,19 +20,13 @@ const Absences = () => {
   const usersPerPage = 10;
   const pagesVisited = pageNumber * usersPerPage;
 
-  const getAbsenceData = async () => {
-    const data = await axios.get('http://localhost:3005/payload')
-    setAbsences(data.data)
-  }
-  const getMembersData = async () => {
-    const data = await axios.get('http://localhost:3004/payload')
-    setMembers(data.data)
-  }
+  
+  
   useEffect(() => {
     setLoading(false)
-    getAbsenceData()
-    getMembersData()
     setLoading(true)
+    dispatch(AbsencesData())
+    dispatch(MembersData())
   }, [])
   const getNameByUserId = (id) => {
     return members.filter((member) => {

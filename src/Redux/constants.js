@@ -1,0 +1,2 @@
+export const ABSENCES_DATA = "ABSENCES_DATA";
+export const MEMBERS_DATA = "MEMBERS_DATA";
