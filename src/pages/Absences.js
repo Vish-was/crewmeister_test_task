@@ -3,10 +3,10 @@ import moment from 'moment'
 import React, { useEffect, useState } from 'react'
 import Filter from '../components/Filter'
 import Pagination from '../components/Pagination'
-import { tableHeader } from '../json/tableData';
 import { useDispatch, useSelector } from 'react-redux'
 import { AbsencesData } from '../Redux/Actions/absencesAction'
 import { MembersData } from '../Redux/Actions/membersAction'
+import { Table,Thead,Td,Th,TableResponsive} from '../styles/Styles';
 
 const Absences = () => {
   const dispatch = useDispatch();
@@ -59,29 +59,34 @@ const Absences = () => {
   return (<>
     {loading ? <div>
       <Filter filter={filter} handleFilterChange={handleFilterChange} />
-      <table className="table">
-        <thead>
+      <TableResponsive>
+      <Table className="table">
+        <Thead>
           <tr>
-            {tableHeader.map((header, index) => (
-              <th key={index} colSpan="col">{header.label}</th>
-            ))}
+            <Th colSpan="col">Member Name</Th>
+            <Th colSpan="col">Types Of Absences</Th>
+            <Th colSpan="col">Period</Th>
+            <Th colSpan="col">Member Note</Th>
+            <Th colSpan="col">Status</Th>
+            <Th colSpan="col">Admitter Note</Th>
           </tr>
-        </thead>
+        </Thead>
         {handleFilterData(absences)?.slice(pagesVisited, pagesVisited + usersPerPage).
           map((absence, index) => (
             <tbody key={index}>
               <tr>
-                <td>{getNameByUserId(absence.userId)[0]?.name}</td>
-                <td>{absence.type}</td>
-                <td>{moment(moment(absence.endDate).format('DD/MMM/YYYY')).diff(moment(absence.startDate).format('DD/MMM/YYYY'), 'days')}</td>
-                <td>{absence?.memberNote ? absence?.memberNote : "-"}</td>
-                <td>{absence.confirmedAt ?  "Confirm" : absence.rejectedAt ? "Rejected" : "Requested" }</td>
-                <td>{absence.admitterNote ? absence.admitterNote : "-"}</td>
+                <Td>{getNameByUserId(absence.userId)[0]?.name}</Td>
+                <Td colSpan="col">{absence.type}</Td>
+                <Td>{moment(moment(absence.endDate).format('DD/MMM/YYYY')).diff(moment(absence.startDate).format('DD/MMM/YYYY'), 'days')}</Td>
+                <Td>{absence?.memberNote ? absence?.memberNote : "-"}</Td>
+                <Td>{absence.confirmedAt ?  "Confirm" : absence.rejectedAt ? "Rejected" : "Requested" }</Td>
+                <Td>{absence.admitterNote ? absence.admitterNote : "-"}</Td>
               </tr>
             </tbody>
           ))}
-        <Pagination pageCount={pageCount} handleChangePage={handleChangePage} />
-      </table>
+      </Table>
+      </TableResponsive>
+      <Pagination pageCount={pageCount} handleChangePage={handleChangePage} />
     </div> : (<>
       <div className="d-flex justify-content-center mt-5">
         <div className="spinner-border" role="status">

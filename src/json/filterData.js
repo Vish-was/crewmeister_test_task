@@ -1,10 +1,10 @@
 export const options = [
     {
-      label: "date",
+      label: "Date",
       value: "date",
     },
     {
-      label: "type",
+      label: "Type",
       value: "type",
     },
   ];
