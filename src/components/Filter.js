@@ -4,10 +4,10 @@ import { options } from '../json/filterData';
 import { Select } from '../styles/Styles';
 const Filter = ({handleFilterChange,filter}) => {
   return (
-    <Select value={filter} onChange={handleFilterChange}>
+    <Select data-testid="select" value={filter} onChange={handleFilterChange}>
        <option value="default">Please Select</option>
     {options.map((option, index) => (
-      <option key={index + 1} value={option.value}>{option.label}</option>
+      <option data-testid="select-option" key={index + 1} value={option.value}>{option.label}</option>
     ))}
   </Select>
   )
