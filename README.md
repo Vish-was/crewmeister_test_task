@@ -1,3 +1,26 @@
+# Following points have been done
+1. Show the list of absences including the names of the employees.
+2. Show the first 10 absences, with the ability to paginate.
+3. Show the total number of absences.
+4. For each absence I show the Member name, Type of absence, Period, Member note (when available), Status (can be 'Requested', 'Confirmed' or 'Rejected'), Admitter note (when available).
+5. I add the filter functionality for the absences by type.
+6. I add the filter functionality for the absences by date.
+7. Show the loading state until the list is available.
+8. Show the error state if the list is unavailable.
+9. Show the empty state if there are no results.
+10. Generate the iCal file.
+11. Implement the redux for the state management.
+12. Implement the styled-component for the UI.
+
+## Test Case Coverages
+1. In App component I cover statements, branch, functions, lines.
+2. In Navbar component I cover branch, statements, functions, lines.
+3. In Filter component I cover  statements, functions, branch, lines
+4. In Absences component I cover  statements, lines, functions, branch.
+5. In Pagination component I cover  statements, functions, lines, branch. 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

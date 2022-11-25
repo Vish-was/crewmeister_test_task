@@ -6,7 +6,7 @@ import configureStore from 'redux-mock-store';
 import thunk from 'redux-thunk'
 
 // eslint-disable-next-line no-undef
-test('renders learn react link', () => {
+test('renders app component', () => {
   const initialState = {
     absence : [
       {
