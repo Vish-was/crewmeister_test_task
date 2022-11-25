@@ -85,5 +85,8 @@ describe("Absence component screen", () => {
 
     let Ical_Export = screen.getByText("ICal Export").textContent;
     expect(Ical_Export).toBe("ICal Export")
+
+    let Total_Absences = screen.getByTestId("total-absence").textContent;
+    expect(Total_Absences).toBe("Total Absences : ")
   });
 });

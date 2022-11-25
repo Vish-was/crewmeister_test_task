@@ -1,4 +1,3 @@
-// import axios from 'axios'
 import moment from "moment";
 import React, { useEffect, useState, useMemo } from "react";
 import Filter from "../components/Filter";
@@ -13,16 +12,18 @@ import {
   Th,
   TableResponsive,
   Button,
+  H3
 } from "../styles/Styles";
 
 const Absences = () => {
   const dispatch = useDispatch();
   const absences = useSelector((state) => state.absence.data);
   const members = useSelector((state) => state.member.data);
-  // let filter = "date"
+  
   const [filter, setFilter] = useState("none");
   const [pageNumber, setPageNumber] = useState(0);
   const [loading, setLoading] = useState(false);
+  const [totalAbsences, setTotalAbsences] = useState(0)
 
   const usersPerPage = 10;
   const pagesVisited = pageNumber * usersPerPage;
@@ -62,6 +63,10 @@ const Absences = () => {
     }
   }, [filter, absences]);
 
+  useEffect(()=>{
+    const data = absences?.filter((absence)=>absence.confirmedAt);
+    setTotalAbsences(data?.length);
+  },[absences])
   const saveCalInvite = (absence) => {
     // Create the .ics URL
     let url = [
@@ -100,6 +105,9 @@ const Absences = () => {
       {loading ? (
         <div>
           <Filter filter={filter} handleFilterChange={handleFilterChange} />
+          <div>
+            <H3 data-testid="total-absence">Total Absences : {totalAbsences}</H3>
+          </div>
           <TableResponsive>
             <Table className="table">
               <Thead>
@@ -121,7 +129,12 @@ const Absences = () => {
                         <Td>{getNameByUserId(absence.userId)[0]?.name}</Td>
                         <Td colSpan="col">{absence.type}</Td>
                         <Td>
-                          {moment(
+                          {!moment(
+                            moment(absence.endDate).format("DD/MMM/YYYY")
+                          ).diff(
+                            moment(absence.startDate).format("DD/MMM/YYYY"),
+                            "days"
+                          ) ? 1 : moment(
                             moment(absence.endDate).format("DD/MMM/YYYY")
                           ).diff(
                             moment(absence.startDate).format("DD/MMM/YYYY"),

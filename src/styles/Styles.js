@@ -6,11 +6,14 @@ export const StyledMenu = styled.div`
   color: #fff;
   padding: 10px 10px 4px;
 `;
+export const H3 = styled.h3`
+    margin-bottom:25px;
+`;
 export const Select = styled.select`
   width: 20%;
   border-color: #ccc;
   padding: 10px;
-  margin-bottom: 20px;
+  margin: 10px 0 20px 0px;
   @media (max-width: 625px) {
     width: 100%;
   }
